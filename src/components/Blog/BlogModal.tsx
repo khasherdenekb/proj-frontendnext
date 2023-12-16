@@ -3,19 +3,16 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "../ui/checkbox";
-import { tags } from "@/config/tag";
+import { UseStoreData } from "@/config/zustand/UseStoreData";
 
-type Props = {};
-
-const BlogModal = (props: Props) => {
+const BlogModal = () => {
+  const { setImage, setTitle, setTag, tag, title, image } = UseStoreData();
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -33,25 +30,35 @@ const BlogModal = (props: Props) => {
         <div className="grid gap-4 py-4">
           <div className="flex flex-col gap-4">
             <Label htmlFor="name">Title</Label>
-            <Input id="title" defaultValue="Garchig" className="col-span-3" />
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              id="title"
+              defaultValue="Garchig"
+              className="col-span-3"
+            />
           </div>
           <div className="flex flex-col gap-4">
             <Label htmlFor="name">Zurag Link</Label>
-            <Input id="title" placeholder="https://" className="col-span-3" />
+            <Input
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              id="img"
+              placeholder="https://"
+              className="col-span-3"
+            />
           </div>
           <div className="flex flex-col  gap-2">
             <Label htmlFor="username">Tag</Label>
-            {tags.map((tag, ind) => (
-              <div key={ind} className="flex items-center gap-2">
-                <Checkbox />
-                <p>{tag}</p>
-              </div>
-            ))}
+            <Input
+              onChange={(e) => setTag(e.target.value)}
+              id="tag"
+              placeholder="software"
+              className="col-span-3"
+              value={tag}
+            />
           </div>
         </div>
-        <DialogFooter>
-          <Button type="submit">Create</Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
