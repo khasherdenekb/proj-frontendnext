@@ -11,6 +11,10 @@ export const siteConfig = {
       label: "Home",
       to: "/",
     },
+    {
+      label: "Blog",
+      to: "/blog",
+    },
   ],
   navMenuItems: [
     {
